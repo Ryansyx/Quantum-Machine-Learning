@@ -53,18 +53,18 @@ plt.tick_params(axis="both", which="minor", labelsize=10)
 plt.show()
 #
 np.random.seed(0)
-num_layers = 5
-var_init = 0.01 * np.random.randn(num_layers, 6)
+num_layers = 6
+var_init = 0.01 * np.random.randn(num_layers, 7)
 print(var_init)
 #
-opt = AdamOptimizer(0.01, beta1=0.5, beta2=0.5)
+opt = AdamOptimizer(0.01, beta1=0.3, beta2=0.3, eps=1e-8)
 
 var = var_init
 for it in range(100):
     var = opt.step(lambda v: cost(v, X, Y), var)
     print("Iter: {:5d} | Cost: {:0.7f} ".format(it + 1, cost(var, X, Y)))
 #
-x_pred = np.linspace(0.5, 1, 50)
+x_pred = np.linspace(0.5, 0.8, 30)
 predictions = [quantum_neural_net(var, x=x_) for x_ in x_pred]
 #
 plt.figure()
